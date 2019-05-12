@@ -7,6 +7,7 @@
 # Meza, Julian              DNI: 39.463.982        #
 # Pompeo, Nicolas Ruben     DNI: 37.276.705        #
 # Entrega: 27/05/2019                              #
+# Entrega n°1                                      #
 #--------------------------------------------------#
 # Dado el siguiente codigo, respnder:
 Param($pathsalida)
@@ -27,8 +28,9 @@ if($existe -eq $true) {
     En caso de no existir, da un mensaje de error.
     
     b) ¿Que validaciones agregaria a la definicion de parametros?
-    Validaria que el usuario tiene permisos para escribir en $pathsalida.
-
+    Validaria que $pathsalida no es un string vacio mediante
+    Param ([ValidateNotNullOrEmpty()][ValidateScript({Test-Path $_})] [string] $path = ".")
+    
     c) ¿Con que cmdlet se podria reemplazar el script para mostrar una salida similiar?
     El cmdlet que realiza una salida similar a Get-ChildItem es Get-Item, aunque, su formato
     para llamarlo se hace particularmente diferente: 
