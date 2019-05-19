@@ -12,17 +12,22 @@
 <#
     .SYNOPSIS
     Este script busca dentro de un directorio y subdirectorios archivos duplicados,
-    considerando "Duplicado" a aquellos archivos con igual nombre e igual peso
+    considerando "Duplicado" a aquellos archivos con igual nombre e igual peso (O, 
+    mas concretamente, igual Hash)
     
     .PARAMETER Path
-    "Path" es aquel directorio padre que hay qeu revisar
+    "Path" es aquel directorio padre que hay que revisar
 
     .EXAMPLE
     .\Ejercicio2.ps1 -path '
+
+    .Link
+    Criterio: http://kenwardtown.com/2016/12/29/find-duplicate-files-with-powershell/
     
     #>
 
     # Validación del parámetro
+    #Comando de referencia: Get-ChildItem $Path -File -Recurse | Get-FileHash | Group-Object -Property Name, Hash | Where-Object Count -GT 1 | foreach {$_.Group | Select -Unique Path, Hash}
 Param
 (
     [CmdletBinding()]
@@ -30,11 +35,21 @@ Param
     [string]$Path
 )
 if(!(Test-Path -PathType Container $Path)) {
-    Write-Error "Path incorrecto."
+    Write-Error "El $Path no existe "
     Exit
 }
-$Archivos=@()
-$Archivos=Get-ChildItem $Path -File -Recurse | Get-FileHash | Group-Object -Property Name, Hash | Where-Object Count -GT 1 | foreach {$_.Group | Select -Unique Path, Hash}
-foreach ($directorio in $Archivos){
-    Write-Output "$directorio $Archivo[$directorio]"
+#Si el directorio existe y es valido
+#La variable 'Archivo' es un array asociativo para almacenar key(hash de un archivo)/value (cantidad de apariciones)
+$archivos=@{}
+#Para cada archivo en $Path has
+Get-ChildItem -File -Recurse $Path | ForEach-Object{
+    #Obten el hash del archivo actual
+    $hash = ($_ | Get-FileHash)
+    #Si hay al menos un Hash en el hashtable y el Hash existe en el array, entoces muestralo
+    if($archivos.Count -gt 0 -and $archivos.Contains($hash.Hash)){
+        Write-Host "Archivo Duplicado, Path: " $_.FullName
+    }else{
+        #Sino agregalo al hashtable
+        $archivos[$hash.Hash]++
+    }
 }
