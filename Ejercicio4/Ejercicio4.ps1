@@ -24,6 +24,26 @@
 
     .Link
     Zipping/Unzipping Files: https://blog.netwrix.com/2018/11/06/using-powershell-to-create-zip-archives-and-unzip-files/
-    
+    Copiar archivos: https://stackoverflow.com/questions/16004984/powershell-command-to-copy-only-text-files
+    Encontrar una cadena de texto: https://devblogs.microsoft.com/scripting/powertip-using-powershell-to-search-text-files-for-letter-pattern/
+
     
     #>
+
+    Param
+(
+    [CmdletBinding()]
+    [parameter(Mandatory=$True)]
+    [string]$Path
+)
+if(!(Test-Path -PathType Container $Path)) {
+    Write-Error "El $Path no existe "
+    Exit
+}
+#Si el directorio existe y es valido
+
+#Para cada archivo .log en $PathLog, si lo encuentra, pasa ese archivo a pipe y luego lo copia. Terminada la operacion, lo pasa a pipe y lo comprime
+Select-String -Pattern '$Cadena'-Path '$PathLog'\*.log | Copy-Item -Destination $PathSalida
+#
+
+#Ahora para 
