@@ -9,18 +9,24 @@
 # Entrega: 27/05/2019                              #
 # Entrega n°1                                      #
 #--------------------------------------------------#
+
 <#
     .SYNOPSIS
-    Este script toma los datos de un archivo .csv (Patente,ValorMulta,Fecha) ($inputPath), ordena de forma ascendente
-    por patente y suma las multas que sean de la misma patente en el mismo año.Luego envia todo a un archivo .csv($outputPath)
+    Este script toma los datos de un archivo .csv (Patente,ValorMulta,Fecha) ($inputPath), 
+    ordena de forma ascendente por patente y suma las multas que sean de la misma patente en el mismo año.
+    Luego envia todo a un archivo .csv($outputPath)
     
-    .PARAMETER "inputPath" es aquel directorio padre que tiene los datos a procesar
+    .PARAMETER inputPath
+    "inputPath" es aquel directorio padre que tiene los datos a procesar
 
-    .PARAMETER "outputPath" archivo destino
+    .PARAMETER outputPath
+    "outputPath" archivo destino
 
     .EXAMPLE
-    ./ejercicio3.ps1 .\patentes.csv patentesOut
+    Ejecucion: .\ejercicio3.ps1 .\patentes.csv patentesOut
 
+    .LINK
+    https://www.google.com.ar
 
 #>
 
@@ -76,7 +82,3 @@ foreach($obj in $hash.Keys){
 $ArrayList1 | Sort-Object -Property Patente
 
 $ArrayList1 | Export-Csv $outputPath".csv" -Delimiter ","  -NoTypeInformation
-
-
-
-
