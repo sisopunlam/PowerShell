@@ -17,10 +17,9 @@
     .PARAMETER "inputPath" es aquel directorio padre que tiene los datos a procesar
 
     .PARAMETER "outputPath" archivo destino
-  
-    
+
     .EXAMPLE
-    . ./ejercicio3.ps1 .\patentes.csv patentesOut
+    ./ejercicio3.ps1 .\patentes.csv patentesOut
 
 
 #>
@@ -43,7 +42,7 @@ $existe_input = Test-Path $inputPath
          Write-Host "VACIO"
          Exit
 }
-    if( $inputPath -ne "*.csv"){
+    if(!($inputPath.Split(".")[2] -eq "csv")){
         Write-Host "SOLO SE ADMITEN ARCHIVOS .CSV"
         Exit
 }
@@ -76,6 +75,7 @@ foreach($obj in $hash.Keys){
 $ArrayList1 | Sort-Object -Property Patente
 
 $ArrayList1 | Export-Csv $outputPath".csv" -Delimiter ","  -NoTypeInformation
+
 
 
 
