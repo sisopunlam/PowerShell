@@ -49,13 +49,23 @@ Param(
 
 
 if ($Procesos) {
-    write-host  "Cantidad de procesos activos: $((Get-Process).count)"
+    [TimeSpan]$interval = [System.TimeSpan]::FromMilliseconds( 1000 ) # 1 sec.
+    while ( $true ) {
+        write-host  "Cantidad de procesos activos: $((Get-Process).count)"
+        [System.Threading.Thread]::Sleep( $interval )
+    }
+    
 }
 if ($Directorio) {
     write-host "Directorio actua: $Path"
 }
-elseif ($Archivo) {     
-    $cant = $((Get-ChildItem -Recurse $Path).count)  #forma de directorios recursivos
-    write-host  "Cantidad de archivos: $cant"   
-    
+elseif ($Archivo) {
+     
+    $interval = [System.TimeSpan]::FromMilliseconds( 1000 ) # 1 sec.
+    while ( $true ) {
+        $cant = $((Get-ChildItem -Recurse $Path).count)  #forma de directorios recursivos
+        write-host  "Cantidad de archivos: $cant"  
+        [System.Threading.Thread]::Sleep( $interval )
+    }
+         
 }
