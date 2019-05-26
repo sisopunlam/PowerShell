@@ -69,7 +69,8 @@ foreach($pat in $cvs)
 
 foreach($obj in $hash.Keys){
     $objeto = Select-Object @{n= 'Patente' ; e = {$obj.Split("/")[0]}},@{n= 'Anio'; e = {$obj.Split("/")[1]}},@{n='TotalMultas';e= {$hash.$obj}} -InputObject ' '
-    $ArrayList1.Add($objeto)
+    $array = $ArrayList1.Add($objeto) 
+   
 }
 
 $ArrayList1 | Sort-Object -Property Patente
