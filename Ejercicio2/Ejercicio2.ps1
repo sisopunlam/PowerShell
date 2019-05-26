@@ -19,7 +19,7 @@
     "Path" es aquel directorio padre que hay que revisar
 
     .EXAMPLE
-    .\Ejercicio2.ps1 -path '
+    .\Ejercicio2.ps1 -path 'C:\Users\Nick\Docmuments'
 
     .Link
     Criterio: http://kenwardtown.com/2016/12/29/find-duplicate-files-with-powershell/
