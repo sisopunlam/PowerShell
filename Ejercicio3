@@ -25,9 +25,6 @@
     .EXAMPLE
     Ejecucion: .\ejercicio3.ps1 .\patentes.csv patentesOut
 
-    .LINK
-    https://www.google.com.ar
-
 #>
 
 [CmdletBinding()]
