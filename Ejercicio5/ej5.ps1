@@ -33,7 +33,7 @@
 
 Param(
     [Parameter(Mandatory = $true, position = 0, ParameterSetName = "procesos")][switch]$Procesos,
-    [Parameter(Mandatory = $true, position = 0, ParameterSetName = "archivos")][switch]$Archivo,
+    [Parameter(Mandatory = $true, position = 0, ParameterSetName = "archivos")][switch]$Archivos,
     [Parameter(Mandatory = $false, ParameterSetName = "directorio")][switch]$Directorio,
 
     [Parameter(Mandatory = $false, Position = 1, HelpMessage = "Ingrese el directorio que quiere vigilar.")]
@@ -59,7 +59,7 @@ if ($Procesos) {
 if ($Directorio) {
     write-host "Directorio actua: $Path"
 }
-elseif ($Archivo) {
+elseif ($Archivos) {
      
     $interval = [System.TimeSpan]::FromMilliseconds( 1000 ) # 1 sec.
     while ( $true ) {
