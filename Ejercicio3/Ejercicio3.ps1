@@ -45,19 +45,17 @@ $existe_input = Test-Path $inputPath
          Write-Host "VACIO"
          Exit
 }
-    if(!($inputPath.Split(".")[2] -eq "csv")){
-        Write-Host "SOLO SE ADMITEN ARCHIVOS .CSV"
-        Exit
-}
+  #  if(!($inputPath.Split(".")[2] -eq "csv")){
+   #     Write-Host "SOLO SE ADMITEN ARCHIVOS .CSV"
+    #    Exit
+
 
 $cvs = Import-Csv $inputPath -Delimiter "," | Select-Object -Property Patente,ValorMulta,Fecha 
 $ArrayList1 = [System.Collections.ArrayList]@() 
 $hash =@{}
-
 foreach($pat in $cvs)
-{
-     $date = Get-Date $pat.Fecha
-     
+{   
+     $date = Get-Date $pat.Fecha     
     
      if($hash.ContainsKey($pat.Patente+"/"+$date.Year)){
 

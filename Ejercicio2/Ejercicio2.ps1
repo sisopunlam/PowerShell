@@ -9,6 +9,7 @@
 # Entrega: 27/05/2019                              #
 # Entrega n°1                                      #
 #--------------------------------------------------#
+
 <#
     .SYNOPSIS
     Este script busca dentro de un directorio y subdirectorios archivos duplicados,
